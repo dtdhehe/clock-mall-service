@@ -20,9 +20,9 @@ public class User {
     @TableField(fill = FieldFill.INSERT)
     private Integer validFlag;
     @TableField(fill = FieldFill.INSERT)
-    private String createTime;
+    private Long createTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updateTime;
+    private Long updateTime;
 
     private String loginName;
 
