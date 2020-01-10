@@ -22,7 +22,7 @@ import java.util.Map;
  * @date 2019/12/10 10:26
  * @description
  **/
-@Api(tags = "登录")
+@Api(tags = "会员")
 @RestController
 @RequestMapping("/user")
 public class UserController {

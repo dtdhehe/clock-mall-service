@@ -18,12 +18,12 @@ public class MybatisObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         this.setFieldValByName("validFlag",ConstantUtils.ACTIVE,metaObject);
-        this.setFieldValByName("createTime",System.currentTimeMillis(),metaObject);
-        this.setFieldValByName("updateTime",System.currentTimeMillis(),metaObject);
+        this.setFieldValByName("createTime",DateUtils.formatDateTime(),metaObject);
+        this.setFieldValByName("updateTime",DateUtils.formatDateTime(),metaObject);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.setFieldValByName("updateTime",System.currentTimeMillis(),metaObject);
+        this.setFieldValByName("updateTime",DateUtils.formatDateTime(),metaObject);
     }
 }
