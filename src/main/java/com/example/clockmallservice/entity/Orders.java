@@ -6,14 +6,16 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @author 包豪娟
  * @version 1.0.0
- * @date 2019/11/6 9:52
+ * @date 2019/12/10 16:22
  * @description
  **/
 @Data
-public class User {
+public class Orders {
 
     @TableId(type = IdType.UUID)
     private String id;
@@ -24,16 +26,20 @@ public class User {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateTime;
 
-    private String loginName;
+    private Integer orderCode;
 
-    private String password;
+    private String customerId;
 
-    private String name;
+    private BigDecimal orderAmount;
 
-    private String phone;
+    private String addressId;
 
-    private String sex;
+    private String deliverySn;
 
-    private Integer userType;
+    private Integer status;
+
+    private String causeId;
+
+    private String causeDesc;
 
 }

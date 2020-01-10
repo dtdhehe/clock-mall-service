@@ -9,11 +9,11 @@ import lombok.Data;
 /**
  * @author 包豪娟
  * @version 1.0.0
- * @date 2019/11/6 9:52
+ * @date 2019/12/10 16:09
  * @description
  **/
 @Data
-public class User {
+public class Address {
 
     @TableId(type = IdType.UUID)
     private String id;
@@ -24,16 +24,18 @@ public class User {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateTime;
 
-    private String loginName;
+    private Integer provinceCode;
 
-    private String password;
+    private Integer cityCode;
 
-    private String name;
+    private Integer countyCode;
 
-    private String phone;
+    private Integer streetCode;
 
-    private String sex;
+    private String addressDetail;
 
-    private Integer userType;
+    private String customerId;
+
+    private Integer status;
 
 }
