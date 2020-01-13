@@ -72,7 +72,6 @@ public class BannerController {
         Banner banner = bannerService.getById(id);
         banner.setValidFlag(ConstantUtils.NOTACTIVE);
         return bannerService.updateById(banner)?ResultUtils.success("删除轮播图成功"):ResultUtils.failed("删除失败");
-
     }
 
     /**
@@ -98,7 +97,6 @@ public class BannerController {
     public ResultVO queryBannerList(@RequestParam Map<String,Object> queryMap){
         QueryWrapper<Banner> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("valid_flag",ConstantUtils.ACTIVE);
-        queryWrapper.eq("user_type",ConstantUtils.CUSTOMER);
         queryWrapper.orderByAsc("sort");
         IPage<Banner> iPage = new Page<>( Long.valueOf((String) queryMap.get("page")),Long.valueOf((String) queryMap.get("size")));
         if (!StringUtils.isEmpty(queryMap.get("bannerName"))){

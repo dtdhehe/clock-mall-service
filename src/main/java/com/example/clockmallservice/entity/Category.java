@@ -28,8 +28,8 @@ public class Category {
 
     private String categoryDesc;
 
-    private Integer categoryCode;
+    private String categoryCode;
 
-    private Integer categoryPcode;
+    private String categoryPcode;
 
 }
