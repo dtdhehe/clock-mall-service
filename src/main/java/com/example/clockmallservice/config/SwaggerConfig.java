@@ -31,7 +31,7 @@ public class SwaggerConfig {
                 //返回一个api选择构建器
                 .select()
                 //指定扫描的包
-                .apis(RequestHandlerSelectors.basePackage("com.example.store.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.clockmallservice.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -43,9 +43,9 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("接口文档")
-                .description("便利店接口文档")
+                .description("钟表商城接口文档")
                 //指定访问的路径
-                .termsOfServiceUrl("http://localhost:9090/")
+                .termsOfServiceUrl("http://localhost:9595/")
                 //添加联系人信息
                 .contact(new Contact("dtdhehe","URL","dtdhehe@sina.com"))
                 //版本描述
