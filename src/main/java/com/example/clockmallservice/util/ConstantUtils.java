@@ -28,8 +28,7 @@ public class ConstantUtils {
      * @return
      */
     public static synchronized String getUniqueKey() {
-        //取前8位为用户主键
-        return UUID.randomUUID().toString().substring(0,8);
+        return UUID.randomUUID().toString().replace("-","");
     }
 
     /**

@@ -139,7 +139,7 @@ public class BannerController {
             return ResultUtils.failed("上传失败");
         }
         //因为浏览器原因，设置虚拟路径为   /uploads/
-        return ResultUtils.success("上传成功","/uploads/"+url);
+        return ResultUtils.success("上传成功","http://localhost:9595/uploads/"+url);
     }
 
 }

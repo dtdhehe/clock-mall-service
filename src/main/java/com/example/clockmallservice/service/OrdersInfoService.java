@@ -10,4 +10,7 @@ import com.example.clockmallservice.entity.OrdersInfo;
  * @description
  **/
 public interface OrdersInfoService extends IService<OrdersInfo> {
+
+
+
 }

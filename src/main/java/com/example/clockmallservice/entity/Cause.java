@@ -28,4 +28,7 @@ public class Cause {
 
     private Integer status;
 
+    private Integer sort;
+
+
 }

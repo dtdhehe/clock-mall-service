@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.clockmallservice.entity.OrdersInfo;
 import com.example.clockmallservice.mapper.OrdersInfoMapper;
 import com.example.clockmallservice.service.OrdersInfoService;
+import com.example.clockmallservice.vo.GoodsVO;
 import org.springframework.stereotype.Service;
 
 /**

@@ -32,6 +32,8 @@ public class OrdersInfo {
 
     private String goodsName;
 
+    private String goodsUrl;
+
     private BigDecimal goodsPrice;
 
     private Integer buyQuantity;

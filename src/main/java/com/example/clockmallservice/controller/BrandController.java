@@ -98,8 +98,12 @@ public class BrandController {
         queryWrapper.orderByAsc("brand_letter");
         IPage<Brand> iPage = new Page<>( Long.valueOf((String) queryMap.get("page")),Long.valueOf((String) queryMap.get("size")));
         if (!StringUtils.isEmpty(queryMap.get("brandName"))){
-            //轮播图名字
+            //品牌名字
             queryWrapper.like("brand_name",queryMap.get("brandName"));
+        }
+        if (!StringUtils.isEmpty(queryMap.get("brandType"))){
+            //品牌归属类型
+            queryWrapper.like("brand_type",queryMap.get("brandType"));
         }
         iPage = brandService.page(iPage,queryWrapper);
         Map<String,Object> resultMap = new HashMap<>(8);

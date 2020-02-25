@@ -36,4 +36,6 @@ public class User {
 
     private Integer userType;
 
+    private String userImgUrl;
+
 }

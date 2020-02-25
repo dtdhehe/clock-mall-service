@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author 包豪娟
  * @version 1.0.0
@@ -27,5 +29,10 @@ public class Brand {
     private String brandName;
 
     private String brandLetter;
+
+    private String brandType;
+
+    @TableField(exist = false)
+    private List<Goods> goodsList;
 
 }

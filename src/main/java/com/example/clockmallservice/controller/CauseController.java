@@ -37,7 +37,7 @@ public class CauseController {
      */
     @PostMapping("")
     public ResultVO addCause(@RequestBody Cause cause){
-        return causeService.save(cause)?ResultUtils.success("新增品牌成功"):ResultUtils.failed("新增失败");
+        return causeService.save(cause)?ResultUtils.success("新增原因成功"):ResultUtils.failed("新增失败");
     }
 
     /**
@@ -95,6 +95,7 @@ public class CauseController {
     public ResultVO queryCauseList(@RequestParam Map<String,Object> queryMap){
         QueryWrapper<Cause> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("valid_flag",ConstantUtils.ACTIVE);
+        queryWrapper.orderByAsc("sort");
         queryWrapper.orderByDesc("update_time");
         IPage<Cause> iPage = new Page<>( Long.valueOf((String) queryMap.get("page")),Long.valueOf((String) queryMap.get("size")));
         if (!StringUtils.isEmpty(queryMap.get("causeName"))){

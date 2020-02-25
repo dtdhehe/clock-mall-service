@@ -119,6 +119,23 @@ public class CategoryController {
     }
 
     /**
+     * 根据code获得类别信息
+     * @param code
+     * @return
+     */
+    @GetMapping("/code/{code}")
+    public ResultVO getCategoryByCode(@PathVariable("code") String code){
+        if (StringUtils.isEmpty(code)){
+            return ResultUtils.failed("传入的id不能为空");
+        }
+        QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("valid_flag",ConstantUtils.ACTIVE);
+        queryWrapper.eq("category_code",code);
+        Category category = categoryService.getOne(queryWrapper);
+        return ResultUtils.success("查询成功",category);
+    }
+
+    /**
      * 查询类别列表
      * @return
      */

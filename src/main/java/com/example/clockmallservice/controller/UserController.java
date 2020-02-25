@@ -9,10 +9,13 @@ import com.example.clockmallservice.util.ConstantUtils;
 import com.example.clockmallservice.util.ResultUtils;
 import com.example.clockmallservice.vo.ResultVO;
 import io.swagger.annotations.Api;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,6 +136,40 @@ public class UserController {
         resultMap.put("pages",iPage.getPages());
         resultMap.put("total",iPage.getTotal());
         return ResultUtils.success("查询成功",resultMap);
+    }
+
+    /**
+     * 上传用户头像
+     * @param file
+     * @return
+     */
+    @PostMapping("/upload")
+    public ResultVO uploadUserImg(MultipartFile file){
+        File f = new File("D:/uploads");
+        StringBuilder url = new StringBuilder();
+        if (!f.exists()){
+            f.mkdirs();
+        }
+        User user = new User();
+        try {
+            String fileName = file.getOriginalFilename();
+            url.append(System.currentTimeMillis()).append(fileName);
+            //新文件路径
+            String resultUrl = "D:/uploads/"+ url;
+            File upFile = new File(resultUrl);
+            file.transferTo(upFile);
+            String returnUrl = "http://localhost:9595/uploads/" + url;
+            //修改用户头像
+            User currUser = (User) SecurityUtils.getSubject().getPrincipal();
+            user = userService.getById(currUser.getId());
+            user.setUserImgUrl(returnUrl);
+            userService.updateById(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtils.failed("上传失败");
+        }
+        //因为浏览器原因，设置虚拟路径为   /uploads/
+        return ResultUtils.success("上传成功",user);
     }
 
 }

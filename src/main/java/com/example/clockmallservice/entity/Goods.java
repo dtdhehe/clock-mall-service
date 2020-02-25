@@ -28,6 +28,9 @@ public class Goods {
 
     private String categoryCode;
 
+    @TableField(exist = false)
+    private String categoryName;
+
     private String goodsCode;
 
     private String goodsName;
@@ -43,5 +46,17 @@ public class Goods {
     private Integer goodsInventory;
 
     private String brandId;
+
+    @TableField(exist = false)
+    private String brandName;
+    @TableField(exist = false)
+    private String brandType;
+
+    private String goodsAttr;
+
+    private Integer goodsLimit;
+
+    @TableField(exist = false)
+    private String goodsCount;
 
 }

@@ -41,6 +41,19 @@ public class AddressController {
             User currUser = (User)SecurityUtils.getSubject().getPrincipal();
             address.setCustomerId(currUser.getId());
         }
+        //查询当前用户的收货地址
+        QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("valid_flag",ConstantUtils.ACTIVE);
+        queryWrapper.eq("customer_id",address.getCustomerId());
+        List<Address> addressList = addressService.list(queryWrapper);
+        address.setIsDefault(ConstantUtils.NOTACTIVE);
+        if (addressList.size() == 0){
+            //首次保存地址，默认为默认地址
+            address.setIsDefault(ConstantUtils.ACTIVE);
+        }
+        if (addressList.size() == 5){
+            return ResultUtils.failed("收货地址最多保存5个");
+        }
         return addressService.save(address)?ResultUtils.success("新增收货地址成功"):ResultUtils.failed("新增失败");
     }
 
@@ -59,6 +72,33 @@ public class AddressController {
             address.setId(id);
         }
         return addressService.updateById(address)?ResultUtils.success("修改收货地址信息成功"):ResultUtils.failed("修改失败");
+    }
+
+    /**
+     * 选择默认地址
+     * @param id
+     * @return
+     */
+    @PutMapping("/default/{id}")
+    public ResultVO checkAddress(@PathVariable String id){
+        if (StringUtils.isEmpty(id)){
+            return ResultUtils.failed("传入的id不能为空");
+        }
+        //先查询所有的收货地址
+        QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("valid_flag",ConstantUtils.ACTIVE);
+        User currUser = (User)SecurityUtils.getSubject().getPrincipal();
+        queryWrapper.eq("customer_id",currUser.getId());
+        List<Address> addressList = addressService.list(queryWrapper);
+        //循环把所有地址设为非默认
+        for (Address item : addressList){
+            item.setIsDefault(ConstantUtils.NOTACTIVE);
+            addressService.updateById(item);
+        }
+        //再把所选地址设为默认
+        Address address = addressService.getById(id);
+        address.setIsDefault(ConstantUtils.ACTIVE);
+        return addressService.updateById(address)?ResultUtils.success("设置默认地址成功"):ResultUtils.failed("设置失败");
     }
 
     /**
@@ -99,6 +139,9 @@ public class AddressController {
     public ResultVO queryAddressList(){
         QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("valid_flag",ConstantUtils.ACTIVE);
+        User currUser = (User)SecurityUtils.getSubject().getPrincipal();
+        queryWrapper.eq("customer_id",currUser.getId());
+        queryWrapper.orderByDesc("is_default");
         queryWrapper.orderByAsc("create_time");
         List<Address> addressList = addressService.list(queryWrapper);
         return ResultUtils.success("查询成功",addressList);

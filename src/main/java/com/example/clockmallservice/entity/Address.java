@@ -24,18 +24,18 @@ public class Address {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateTime;
 
-    private Integer provinceCode;
-
-    private Integer cityCode;
-
-    private Integer countyCode;
-
-    private Integer streetCode;
-
-    private String addressDetail;
+    private String selectedOptions;
 
     private String customerId;
 
-    private Integer status;
+    private String receiverName;
+
+    private String receiverPhone;
+
+    private String receiverAddress;
+
+    private String detailAddress;
+
+    private Integer isDefault;
 
 }
